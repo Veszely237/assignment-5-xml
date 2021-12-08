@@ -1,0 +1,77 @@
+<html>
+<body>
+  <h1>Assignment 5</h1> 
+  <h3>This web application gets the current list of team members in both the Blue team and the Red team!</h3>
+  <br>
+  <hr>
+  <h2>Blue Team (using jQuery call)</h2>
+  <hr>
+  <ul id="blueTeam">
+  </ul>
+  <hr>
+  <h2>Red Team (using AJAX call)</h2>
+  <hr>
+  <ul id="redTeam">
+  </ul>
+  <br>
+  <button type="button" onclick="GetBlueTeam()">
+    Get Blue Team
+  </button>
+  <button type="button" onclick="GetRedTeam()">
+    Get Red Team
+  </button>
+  <script>
+    // Get Blue team using jQuery call
+    function GetBlueTeam() {
+            $.getJSON('blueTeam.json', function(json) {
+                    ProcessJSONBlue(json);
+                })
+        }
+    // Get Red Team using AJAX call
+    function GetRedTeam() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.timeout = 3000;
+        xhttp.responseType = "json";
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                ProcessJSONRed(this.response);
+            }
+        };
+        xhttp.open("GET", "redTeam.json", true);
+        xhttp.send();
+    }
+    // Process the JSON for the blue team
+    function ProcessJSONBlue(json) {
+        // Loop through each team member
+        for(let i = 0; i < json.team.length; i++) {
+            let list = document.createElement("li"); // Make 'li' element
+            // Add 25 health points to each team member
+            let node = document.createTextNode(
+            json.team[i].name + 
+            " is playing as the " + json.team[i].role + 
+            " with the health points of " + (json.team[i].health + 25)
+            );
+            list.appendChild(node); // Append text node to 'li' element
+            let element = document.getElementById("blueTeam"); // Get the 'ul' element with the id 'blueTeam'
+            element.appendChild(list); // Append 'li' element to the element.
+      }
+    }
+    // Process the JSON for the red team
+    function ProcessJSONRed(json) {
+        // Loop through each team member
+        for(let i = 0; i < json.team.length; i++) {
+            let list = document.createElement("li"); // Make 'li' element
+            // Add 25 health points to each team member
+            let node = document.createTextNode(
+            json.team[i].name + 
+            " is playing as the " + json.team[i].role + 
+            " with the health points of " + (json.team[i].health + 25)
+            );
+            list.appendChild(node); // Append text node to 'li' element
+            let element = document.getElementById("redTeam"); // Get the 'ul' element with the id 'redTeam'
+            element.appendChild(list); // Append 'li' element to the element.
+      }
+    }
+  </script>
+</body>
+</html>

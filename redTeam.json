@@ -1,0 +1,28 @@
+{
+    "team": [ 
+        {
+            "name": "Sett",
+            "role": "Top Laner",
+            "health": 155
+        },
+        {
+            "name": "Elise",
+            "role": "Jungler",
+            "health": 178
+        },
+        {
+            "name": "Yasuo",
+            "role": "Mid Laner",
+            "health": 112
+        },
+        {
+            "name": "Varus",
+            "role": "Attack Damage Carry",
+            "health": 135
+        },
+        {
+            "name": "Zyra",
+            "role": "Support",
+            "health": 177
+        }
+]}
